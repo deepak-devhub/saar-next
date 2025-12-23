@@ -24,7 +24,7 @@ import industryImage from '@/assets/images/industry.webp';
 import foodImage from '@/assets/images/food.webp';
 
 // Client Logos
-import nmdcLogo from '@/assets/logo/NMDC Group white.svg';
+import nmdcLogo from '@/assets/logo/nmdc-group-white.svg';
 import arcaLogo from '@/assets/logo/arca.png';
 import artcenteralLogo from '@/assets/logo/artcenteral.svg';
 import chinaHarbourLogo from '@/assets/logo/china-harbour.png';
