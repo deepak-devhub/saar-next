@@ -60,7 +60,7 @@ export default function GalleryPage() {
     };
 
     return (
-        <div className="min-h-screen bg-primary-950">
+        <div className="min-h-screen bg-black">
             {/* Hero Section */}
             <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center text-white overflow-hidden">
                 <Image
@@ -84,10 +84,9 @@ export default function GalleryPage() {
                 <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 text-center" data-scroll="parallax">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: false, amount: 0.1 }}
+                        animate={{ opacity: 1, y: 0 }}
                         transition={{
-                            duration: 0.5,
+                            duration: 0.6,
                             delay: 0.2,
                             ease: cinematicEase,
                         }}
@@ -164,8 +163,7 @@ export default function GalleryPage() {
                     <motion.div
                         variants={containerVariants}
                         initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, amount: 0.05 }}
+                        animate="visible"
                         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
                     >
                         {galleryItems.map((item) => (
