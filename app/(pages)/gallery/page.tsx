@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import Image, { StaticImageData } from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Maximize2 } from 'lucide-react';
 import Section from '@/components/ui/Section';
@@ -20,15 +21,15 @@ import Lottie from 'lottie-react';
 import galleryPageImage from '@/assets/images/gallery.jpg';
 import galleryLottie from '@/assets/lootie/gallery/gallery.json';
 
-const galleryItems = [
-    { id: 1, src: hvacImage.src, title: 'HVAC System Design', category: 'Mechanical' },
-    { id: 2, src: electricalImage.src, title: 'Electrical System Design', category: 'Electrical' },
-    { id: 3, src: plumbingImage.src, title: 'Plumbing System Design', category: 'Plumbing' },
-    { id: 4, src: elvImage.src, title: 'ELV System Design', category: 'Systems' },
-    { id: 5, src: flsImage.src, title: 'FLS System Design', category: 'Safety' },
-    { id: 6, src: bimImage.src, title: 'BIM & Coordination', category: 'Modeling' },
-    { id: 7, src: autoCadImage.src, title: 'Auto CAD Designing', category: 'Design' },
-    { id: 8, src: softwareTrainingImage.src, title: 'Software Training', category: 'Education' },
+const galleryItems: { id: number; src: StaticImageData; title: string; category: string }[] = [
+    { id: 1, src: hvacImage, title: 'HVAC System Design', category: 'Mechanical' },
+    { id: 2, src: electricalImage, title: 'Electrical System Design', category: 'Electrical' },
+    { id: 3, src: plumbingImage, title: 'Plumbing System Design', category: 'Plumbing' },
+    { id: 4, src: elvImage, title: 'ELV System Design', category: 'Systems' },
+    { id: 5, src: flsImage, title: 'FLS System Design', category: 'Safety' },
+    { id: 6, src: bimImage, title: 'BIM & Coordination', category: 'Modeling' },
+    { id: 7, src: autoCadImage, title: 'Auto CAD Designing', category: 'Design' },
+    { id: 8, src: softwareTrainingImage, title: 'Software Training', category: 'Education' },
 ];
 
 const cinematicEase = [0.25, 0.1, 0.25, 1] as const;
@@ -62,9 +63,12 @@ export default function GalleryPage() {
         <div className="min-h-screen bg-primary-950">
             {/* Hero Section */}
             <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center text-white overflow-hidden">
-                <div
-                    className="absolute inset-0 bg-cover bg-center"
-                    style={{ backgroundImage: `url(${galleryPageImage.src})` }}
+                <Image
+                    src={galleryPageImage}
+                    alt="Gallery Hero"
+                    fill
+                    priority
+                    className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-br from-black/65 via-black/55 to-black/45" />
                 <div
@@ -106,7 +110,7 @@ export default function GalleryPage() {
                                 initial={{ opacity: 0, scale: 0.6 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ delay: 0.5, duration: 0.8 }}
-                                className="md:hidden flex justify-center my-4"
+                                className="md:hidden flex justify-center mt-12 mb-8"
                             >
                                 <div className="w-24 h-24">
                                     <Lottie
@@ -141,7 +145,7 @@ export default function GalleryPage() {
                             initial={{ opacity: 0, scale: 0.6, x: 20 }}
                             animate={{ opacity: 1, scale: 1, x: 0 }}
                             transition={{ delay: 0.6, duration: 0.8 }}
-                            className="hidden md:block absolute top-[0%] -right-24 md:-right-36 -translate-y-1/2 w-20 h-20 md:w-28 md:h-28"
+                            className="hidden md:block absolute top-[50%] -right-24 md:-right-36 -translate-y-1/2 w-20 h-20 md:w-28 md:h-28"
                         >
                             <Lottie
                                 animationData={galleryLottie}
@@ -180,11 +184,13 @@ export default function GalleryPage() {
                                     <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
                                     {/* Image */}
-                                    <motion.img
+                                    <Image
                                         src={item.src}
                                         alt={item.title}
-                                        loading="lazy"
-                                        className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                                        fill
+                                        className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+                                        priority={item.id <= 4}
                                     />
 
                                     {/* Modern Overlay */}
@@ -256,10 +262,11 @@ export default function GalleryPage() {
                             onClick={(e) => e.stopPropagation()}
                         >
                             <div className="relative flex-1 w-full h-full max-h-[70vh] md:max-h-full overflow-hidden rounded-3xl shadow-[0_0_100px_rgba(0,0,0,0.5)] border border-white/5 bg-secondary-900">
-                                <img
+                                <Image
                                     src={selectedImage.src}
                                     alt={selectedImage.title}
-                                    className="w-full h-full object-contain"
+                                    fill
+                                    className="object-contain"
                                 />
                             </div>
 

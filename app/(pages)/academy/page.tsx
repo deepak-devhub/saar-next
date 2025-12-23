@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, type Variants } from 'framer-motion';
 import {
     BookOpen, Users, Briefcase, Award,
@@ -100,9 +101,12 @@ export default function AcademyPage() {
         <>
             {/* Hero Section */}
             <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center text-white overflow-hidden">
-                <div
-                    className="absolute inset-0 bg-cover bg-center"
-                    style={{ backgroundImage: `url(${academyPageImage.src})` }}
+                <Image
+                    src={academyPageImage}
+                    alt="Academy Hero"
+                    fill
+                    priority
+                    className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-br from-black/65 via-black/55 to-black/45" />
                 <div
@@ -215,7 +219,7 @@ export default function AcademyPage() {
             </Section>
 
             {/* Courses Grid */}
-            <Section background="primary" backgroundSlot={<ParallaxStars />}>
+            <Section background="primary">
                 <motion.div
                     variants={sectionReveal}
                     initial="hidden"
@@ -228,40 +232,25 @@ export default function AcademyPage() {
                         Comprehensive training programs for every career stage
                     </motion.p>
                 </motion.div>
-                <motion.div
-                    variants={sectionReveal}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={eagerViewport}
-                    className="p-6 rounded-xl shadow-lg grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"
-                >
+                <div className="p-6 rounded-xl shadow-lg grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
                     {courses.map((course, index) => (
-                        <motion.div
+                        <Card
                             key={course.title}
-                            variants={childFade}
-                            whileHover={{ scale: 1.04, y: -4 }}
-                            transition={{
-                                delay: index * 0.05,
-                                duration: 0.45,
-                                ease: cinematicEase,
-                                scale: { duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }
-                            }}
-                            className="h-full"
+                            hover
+                            className='bg-secondary-900 h-full flex flex-col'
                         >
-                            <Card hover className='bg-secondary-900 h-full flex flex-col'>
-                                <div className="p-6 flex-grow flex flex-col">
-                                    <div className="flex items-start justify-between mb-4">
-                                        <BookOpen className="w-8 h-8 text-primary-600 flex-shrink-0" />
-                                        <span className="text-sm text-black bg-primary-600 px-2 py-1 rounded">
-                                            {course.duration}
-                                        </span>
-                                    </div>
-                                    <h3 className="text-lg font-bold text-gray-300 flex-grow">{course.title}</h3>
+                            <div className="p-6 flex-grow flex flex-col">
+                                <div className="flex items-start justify-between mb-4">
+                                    <BookOpen className="w-8 h-8 text-primary-600 flex-shrink-0" />
+                                    <span className="text-sm text-black bg-primary-600 px-2 py-1 rounded">
+                                        {course.duration}
+                                    </span>
                                 </div>
-                            </Card>
-                        </motion.div>
+                                <h3 className="text-lg font-bold text-gray-300 flex-grow">{course.title}</h3>
+                            </div>
+                        </Card>
                     ))}
-                </motion.div>
+                </div>
             </Section>
 
             {/* Features Section */}
@@ -311,7 +300,7 @@ export default function AcademyPage() {
             </Section>
 
             {/* CTAs */}
-            <Section background="primary" backgroundSlot={<ParallaxStars />}>
+            <Section background="primary">
                 <motion.div
                     variants={sectionReveal}
                     initial="hidden"

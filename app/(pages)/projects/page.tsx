@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import Image, { StaticImageData } from 'next/image';
 import { motion } from 'framer-motion';
 import { MapPin, ArrowRight, FileText } from 'lucide-react';
 import { useState } from 'react';
@@ -24,7 +25,7 @@ interface Project {
     type: string;
     description: string;
     highlights: string[];
-    image: string;
+    image: StaticImageData | string;
 }
 
 const projects: Project[] = [
@@ -40,7 +41,7 @@ const projects: Project[] = [
             'Advanced fire safety and life safety systems',
             'BIM coordination across all disciplines',
         ],
-        image: nmdcImage.src,
+        image: nmdcImage,
     },
     {
         id: 2,
@@ -54,7 +55,7 @@ const projects: Project[] = [
             'Industrial-grade plumbing and drainage',
             'Value engineering optimization',
         ],
-        image: industryImage.src,
+        image: industryImage,
     },
     {
         id: 3,
@@ -68,7 +69,7 @@ const projects: Project[] = [
             'Critical power and backup systems',
             'Code compliance for food industry',
         ],
-        image: foodImage.src,
+        image: foodImage,
     },
     {
         id: 4,
@@ -82,7 +83,7 @@ const projects: Project[] = [
             'High-end fire suppression systems',
             'Detailed MEP coordination for retail spaces',
         ],
-        image: nmdcImage.src,
+        image: nmdcImage,
     },
     {
         id: 5,
@@ -96,7 +97,7 @@ const projects: Project[] = [
             'Emergency and life safety systems',
             'Energy-efficient lighting controls',
         ],
-        image: nmdcImage.src,
+        image: nmdcImage,
     },
     {
         id: 6,
@@ -110,7 +111,7 @@ const projects: Project[] = [
             'Specialized gas and chemical drainage',
             'Advanced security and automation systems',
         ],
-        image: industryImage.src,
+        image: industryImage,
     },
     {
         id: 7,
@@ -124,12 +125,11 @@ const projects: Project[] = [
             'Custom fire protection for art collections',
             'Humidity-controlled storage areas',
         ],
-        image: nmdcImage.src,
+        image: nmdcImage,
     },
 ];
 
 export default function ProjectsPage() {
-
     const [filter, setFilter] = useState<string>('all');
 
     const filteredProjects = filter === 'all'
@@ -137,12 +137,15 @@ export default function ProjectsPage() {
         : projects.filter(p => p.type.toLowerCase() === filter.toLowerCase());
 
     return (
-        <>
+        <div className="overflow-x-hidden">
             {/* Hero Section */}
             <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center text-white overflow-hidden">
-                <div
-                    className="absolute inset-0 bg-cover bg-center"
-                    style={{ backgroundImage: `url(${projectImage.src})` }}
+                <Image
+                    src={projectImage}
+                    alt="Projects Hero"
+                    fill
+                    priority
+                    className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/55 to-black/45" />
                 <div
@@ -155,7 +158,6 @@ export default function ProjectsPage() {
                     }}
                 />
                 <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 text-center">
-
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -178,14 +180,14 @@ export default function ProjectsPage() {
                                 Our Projects
                             </h1>
 
-                            {/* ICON – MIDDLE (Mobile only) */}
+                            {/* ICON – Responsive Position */}
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.6 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ delay: 0.5, duration: 0.8 }}
-                                className="md:hidden flex justify-center my-4"
+                                className="flex justify-center my-4 md:my-0 md:absolute md:top-1/2 md:-right-32 md:-translate-y-1/2"
                             >
-                                <div className="w-24 h-24">
+                                <div className="w-24 h-24 md:w-28 md:h-28">
                                     <Lottie
                                         animationData={projectManagementLottie}
                                         loop
@@ -205,24 +207,7 @@ export default function ProjectsPage() {
                                 Showcasing Engineering Excellence
                             </p>
                         </div>
-
-                        {/* ICON – RIGHT SIDE (Desktop only) */}
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.6, x: 20 }}
-                            animate={{ opacity: 1, scale: 1, x: 0 }}
-                            transition={{ delay: 0.6, duration: 0.8 }}
-                            className="hidden md:block absolute top-1/2 -right-24 md:-right-36 -translate-y-1/2 w-20 h-20 md:w-28 md:h-28"
-                        >
-                            <Lottie
-                                animationData={projectManagementLottie}
-                                loop
-                                autoplay
-                                style={{ width: '100%', height: '100%' }}
-                            />
-                        </motion.div>
                     </motion.div>
-
-
                 </div>
             </section>
 
@@ -258,84 +243,74 @@ export default function ProjectsPage() {
                 {/* Projects Grid */}
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
                     {filteredProjects.map((project, index) => (
-                        <motion.div
+                        <Card
                             key={project.id}
-                            initial="rest"
-                            animate="rest"
-                            whileHover="hover"
-                            whileInView="visible"
-                            transition={{
-                                delay: Math.min(index * 0.05, 0.3),
-                                duration: 0.5,
-                                ease: cinematicEase,
-                            }}
+                            hover
+                            className="group h-full flex flex-col bg-secondary-900 border border-gold-800/10"
                         >
-                            <Card hover className="group h-full flex flex-col bg-secondary-900 border border-gold-800/10">
-                                <div className="aspect-video relative overflow-hidden">
-                                    <img
-                                        src={project.image}
-                                        alt={project.title}
-                                        loading="lazy"
-                                        className="w-full h-full object-cover"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-br from-black/30 via-black/10 to-transparent" />
-                                    {/* Brand gold soft-light overlay to keep text legible on lighter images */}
-                                    <div
-                                        className="absolute inset-0 pointer-events-none"
-                                        style={{
-                                            backgroundImage:
-                                                'linear-gradient(90deg, rgba(240, 229, 149, 0.25) 0%, rgba(222, 204, 128, 0.25) 50%, rgba(182, 150, 77, 0.25) 100%)',
-                                            mixBlendMode: 'soft-light',
-                                        }}
-                                    />
-                                    {/* Animated gold glare sweep on hover */}
+                            <div className="aspect-video relative overflow-hidden">
+                                <Image
+                                    src={project.image}
+                                    alt={project.title}
+                                    fill
+                                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                    priority={index < 3}
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-br from-black/30 via-black/10 to-transparent" />
+                                {/* Brand gold soft-light overlay */}
+                                <div
+                                    className="absolute inset-0 pointer-events-none"
+                                    style={{
+                                        backgroundImage:
+                                            'linear-gradient(90deg, rgba(240, 229, 149, 0.15) 0%, rgba(222, 204, 128, 0.15) 50%, rgba(182, 150, 77, 0.15) 100%)',
+                                        mixBlendMode: 'soft-light',
+                                    }}
+                                />
+                                {/* Animated gold glare sweep */}
+                                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                                     <motion.div
-                                        variants={{
-                                            rest: { opacity: 0, x: '-100%' },
-                                            hover: {
-                                                opacity: 0.85,
-                                                x: '100%',
-                                                transition: { duration: 0.9, ease: [0.45, 0, 0.55, 1] },
-                                            },
-                                        }}
+                                        initial={{ x: '-100%' }}
+                                        whileHover={{ x: '100%' }}
+                                        transition={{ duration: 0.9, ease: [0.45, 0, 0.55, 1] }}
                                         className="absolute inset-0 pointer-events-none"
                                         style={{
                                             backgroundImage:
-                                                'linear-gradient(120deg, transparent, rgba(240, 229, 149, 0.4), transparent)',
+                                                'linear-gradient(120deg, transparent, rgba(240, 229, 149, 0.3), transparent)',
                                             transform: 'skewX(-20deg)',
                                         }}
                                     />
-                                    <div className="absolute top-4 right-4 bg-gold-500/20 backdrop-blur-md text-gold-200 px-3 py-1 rounded-full text-xs font-semibold border border-gold-500/30">
-                                        {project.type}
-                                    </div>
                                 </div>
-                                <div className="p-6 flex-grow flex flex-col">
-                                    <h3 className="text-2xl font-bold text-gold-gradient mb-2">{project.title}</h3>
-                                    <div className="flex items-center text-gray-300 mb-4">
-                                        <MapPin className="w-4 h-4 mr-2" />
-                                        <span className="text-sm">{project.location}</span>
-                                    </div>
-                                    <p className="text-gray-300 mb-4 flex-grow">{project.description}</p>
-                                    <div className="border-t pt-4">
-                                        <p className="text-sm font-semibold text-gold-gradient mb-2">Key Highlights:</p>
-                                        <ul className="space-y-1">
-                                            {project.highlights.map((highlight, idx) => (
-                                                <li key={idx} className="text-sm text-gray-300 flex items-start">
-                                                    <span className="text-gold-gradient mr-2">•</span>
-                                                    {highlight}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
+                                <div className="absolute top-4 right-4 bg-gold-500/20 backdrop-blur-md text-gold-200 px-3 py-1 rounded-full text-xs font-semibold border border-gold-500/30 z-10">
+                                    {project.type}
                                 </div>
-                            </Card>
-                        </motion.div>
+                            </div>
+                            <div className="p-6 flex-grow flex flex-col">
+                                <h3 className="text-2xl font-bold text-gold-gradient mb-2">{project.title}</h3>
+                                <div className="flex items-center text-gray-300 mb-4">
+                                    <MapPin className="w-4 h-4 mr-2" />
+                                    <span className="text-sm">{project.location}</span>
+                                </div>
+                                <p className="text-gray-300 mb-4 flex-grow">{project.description}</p>
+                                <div className="border-t border-gold-800/20 pt-4">
+                                    <p className="text-sm font-semibold text-gold-gradient mb-2">Key Highlights:</p>
+                                    <ul className="space-y-1">
+                                        {project.highlights.map((highlight, idx) => (
+                                            <li key={idx} className="text-sm text-gray-300 flex items-start">
+                                                <span className="text-gold-gradient mr-2">•</span>
+                                                {highlight}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+                        </Card>
                     ))}
                 </div>
             </Section>
 
             {/* CTA */}
-            <Section className="!pt-8 md:!pt-12" backgroundSlot={<ParallaxStars />}>
+            <Section className="!pt-8 md:!pt-12">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-3xl md:text-4xl font-bold text-gold-gradient mb-6">
                         Have a Project in Mind?
@@ -352,6 +327,6 @@ export default function ProjectsPage() {
                     </Link>
                 </div>
             </Section>
-        </>
+        </div>
     );
 }

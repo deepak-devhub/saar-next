@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Briefcase, Mail, Users, GraduationCap, ArrowRight, CheckCircle, AlertCircle, X } from 'lucide-react';
 import Section from '@/components/ui/Section';
@@ -9,7 +10,6 @@ import Button from '@/components/ui/Button';
 import Modal from '@/components/ui/Modal';
 import JobApplicationForm, { type JobApplicationFormData } from '@/components/ui/JobApplicationForm';
 import { AnimatePresence } from 'framer-motion';
-import ParallaxStars from '@/components/ui/ParallaxStars';
 import careersImage from '@/assets/images/careers.webp';
 import Lottie from 'lottie-react';
 import emailLottie from '@/assets/lootie/career/Email Sent by Todd Rocheford.json';
@@ -191,9 +191,12 @@ export default function CareersPage() {
             </div>
             {/* Hero Section */}
             <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center text-white overflow-hidden">
-                <div
-                    className="absolute inset-0 bg-cover bg-center"
-                    style={{ backgroundImage: `url(${careersImage.src})` }}
+                <Image
+                    src={careersImage}
+                    alt="Careers Hero"
+                    fill
+                    priority
+                    className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-br from-black/65 via-black/55 to-black/45" />
                 <div
@@ -201,8 +204,6 @@ export default function CareersPage() {
                     style={{
                         backgroundImage:
                             'linear-gradient(90deg, rgba(240, 229, 149, 0) 0%, rgba(240, 229, 149, 0.18) 25%, rgba(222, 204, 128, 0.28) 50%, rgba(182, 150, 77, 0.22) 75%, rgba(182, 150, 77, 0) 100%)',
-                        mixBlendMode: 'soft-light',
-                        filter: 'blur(0.5px)',
                     }}
                 />
                 <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -266,7 +267,7 @@ export default function CareersPage() {
             </section>
 
             {/* Intro Section */}
-            <Section backgroundSlot={<ParallaxStars />}>
+            <Section>
                 <div className="max-w-4xl mx-auto text-center">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -309,7 +310,7 @@ export default function CareersPage() {
             </Section>
 
             {/* Open Positions */}
-            <Section backgroundSlot={<ParallaxStars />}>
+            <Section>
                 <div className="text-center mb-12">
                     <h2 className="text-3xl md:text-4xl font-bold text-gold-gradient mb-4">Open Positions</h2>
                     <p className="text-lg text-gray-300">
@@ -318,75 +319,61 @@ export default function CareersPage() {
                 </div>
                 <div className="max-w-5xl mx-auto space-y-6">
                     {positions.map((position, index) => (
-                        <motion.div
+                        <Card
                             key={position.title}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            whileHover={{ scale: 1.05 }}
-                            viewport={{ once: true, margin: '-100px' }}
-                            transition={{
-                                delay: index * 0.1,
-                                duration: 0.5,
-                                ease: cinematicEase,
-                                scale: { duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] } // Smooth cinematic easing - matches hero sections
-                            }}
+                            hover
+                            className='bg-secondary-900'
                         >
-                            <Card hover className='bg-secondary-900'>
-                                <div className="p-8">
-                                    <div className="flex items-start justify-between mb-4">
-                                        <div>
-                                            <h3 className="text-2xl font-bold text-gold-gradient mb-2">{position.title}</h3>
-                                            <span className="inline-block px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm font-medium">
-                                                {position.department}
-                                            </span>
-                                        </div>
-                                        <Briefcase className="w-8 h-8 text-primary-600 flex-shrink-0" />
+                            <div className="p-8">
+                                <div className="flex items-start justify-between mb-4">
+                                    <div>
+                                        <h3 className="text-2xl font-bold text-gold-gradient mb-2">{position.title}</h3>
+                                        <span className="inline-block px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm font-medium">
+                                            {position.department}
+                                        </span>
                                     </div>
-                                    <p className="text-gray-300 mb-6 leading-relaxed">{position.description}</p>
-                                    <div className="border-t pt-4">
-                                        <p className="font-semibold text-gold-gradient mb-3">Requirements:</p>
-                                        <ul className="space-y-2">
-                                            {position.requirements.map((req, idx) => (
-                                                <li key={idx} className="text-gray-300 flex items-start">
-                                                    <span className="text-gold-gradient mr-2 mt-1">•</span>
-                                                    {req}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                    <div className="pt-2 flex justify-center sm:justify-end">
-                                        <Button
-                                            variant="primary"
-                                            className="w-full sm:w-auto px-4 py-2 min-h-[44px]"
-                                            onClick={() => handleOpenApply(position.title)}
-                                        >
-                                            Apply Now
-                                        </Button>
-                                    </div>
+                                    <Briefcase className="w-8 h-8 text-primary-600 flex-shrink-0" />
                                 </div>
-                            </Card>
-                        </motion.div>
+                                <p className="text-gray-300 mb-6 leading-relaxed">{position.description}</p>
+                                <div className="border-t border-gold-800/20 pt-4">
+                                    <p className="font-semibold text-gold-gradient mb-3">Requirements:</p>
+                                    <ul className="space-y-2">
+                                        {position.requirements.map((req, idx) => (
+                                            <li key={idx} className="text-gray-300 flex items-start">
+                                                <span className="text-gold-gradient mr-2 mt-1">•</span>
+                                                {req}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                <div className="pt-2 flex justify-center sm:justify-end">
+                                    <Button
+                                        variant="primary"
+                                        className="w-full sm:w-auto px-4 py-2 min-h-[44px]"
+                                        onClick={() => handleOpenApply(position.title)}
+                                    >
+                                        Apply Now
+                                    </Button>
+                                </div>
+                            </div>
+                        </Card>
                     ))}
                 </div>
             </Section>
 
             {/* CTA */}
-            <Section backgroundSlot={<ParallaxStars />}>
+            <Section>
                 <div className="max-w-4xl mx-auto text-center">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        whileHover={{ scale: 1.03 }}
                         viewport={{ once: true, margin: '-100px' }}
                         transition={{
                             duration: 0.5,
-                            ease: cinematicEase,
-                            scale: { duration: 0.22, ease: [0.25, 0.46, 0.45, 0.94] } // Smooth cinematic easing - matches hero sections
+                            ease: cinematicEase
                         }}
                     >
-                        <div className="bg-gradient-to-br rounded-2xl p-12">
+                        <div className="bg-gradient-to-br from-secondary-900/50 to-black rounded-2xl p-12 border border-gold-800/10">
                             <Mail className="w-16 h-16 text-primary-600 mx-auto mb-6" />
                             <h2 className="text-3xl md:text-4xl font-bold text-gold-gradient mb-4">
                                 Ready to Apply?

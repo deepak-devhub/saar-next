@@ -1,13 +1,14 @@
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, type Variants } from 'framer-motion';
 import Lottie from 'lottie-react';
 import { Target, Rocket, Lightbulb, BookOpen, ArrowRight } from 'lucide-react';
 import Section from '@/components/ui/Section';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
-import aboutImage from '@/assets/images/contact.webp';
+import aboutImage from '@/assets/images/about.webp';
 import ParallaxStars from '@/components/ui/ParallaxStars';
 import formLottie from '@/assets/lootie/about/Form.json';
 import { useScrollAnimations } from '@/hooks/useScrollAnimations';
@@ -76,9 +77,12 @@ export default function AboutPage() {
         <>
             {/* Hero Banner */}
             <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center text-white overflow-hidden">
-                <div
-                    className="absolute inset-0 bg-cover bg-center"
-                    style={{ backgroundImage: `url(${aboutImage.src})` }}
+                <Image
+                    src={aboutImage}
+                    alt="About Hero"
+                    fill
+                    priority
+                    className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/55 to-black/45" />
                 <div
@@ -162,9 +166,8 @@ export default function AboutPage() {
                             ease: cinematicEase,
                         }}
                         className="prose prose-lg max-w-none"
-                        data-scroll="card"
                     >
-                        <h2 data-scroll="title" className="text-3xl md:text-4xl font-bold text-gold-gradient mb-6 text-center">
+                        <h2 className="text-3xl md:text-4xl font-bold text-gold-gradient mb-6 text-center">
                             Overview of SAAR Group
                         </h2>
                         <div className="space-y-4 text-lg text-gray-300 leading-relaxed">
@@ -190,7 +193,7 @@ export default function AboutPage() {
             </Section>
 
             {/* Vision & Mission */}
-            <Section background="primary" backgroundSlot={<ParallaxStars />}>
+            <Section background="primary">
                 <motion.div
                     variants={sectionReveal}
                     initial="hidden"
@@ -198,59 +201,39 @@ export default function AboutPage() {
                     viewport={eagerViewport}
                     className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto"
                 >
-                    <motion.div
-                        variants={childFade}
-                        whileHover={{ scale: 1.05 }}
-                        transition={{
-                            duration: 0.55,
-                            ease: cinematicEase,
-                            scale: { duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] },
-                        }}
-                    >
-                        <Card>
-                            <div className="p-8 bg-secondary-900">
-                                <div className="flex items-center gap-4 mb-6">
-                                    <div className="w-12 h-12 md:w-16 md:h-16 bg-primary-100 rounded-full flex items-center justify-center shrink-0">
-                                        <Target className="w-6 h-6 md:w-8 md:h-8 text-primary-600" />
-                                    </div>
-                                    <h3 className="text-2xl font-bold text-gold-gradient">Our Vision</h3>
+                    <Card hover className="bg-secondary-900 border border-gold-800/10">
+                        <div className="p-8">
+                            <div className="flex items-center gap-4 mb-6">
+                                <div className="w-12 h-12 md:w-16 md:h-16 bg-primary-100 rounded-full flex items-center justify-center shrink-0">
+                                    <Target className="w-6 h-6 md:w-8 md:h-8 text-primary-600" />
                                 </div>
-                                <p className="text-gray-300 leading-relaxed">
-                                    To be a leading force in MEP engineering and education, recognized for our
-                                    commitment to sustainability, innovation, and reliability. We envision a
-                                    future where engineering excellence and quality education work hand-in-hand
-                                    to create lasting value for our clients, students, and communities.
-                                </p>
+                                <h3 className="text-2xl font-bold text-gold-gradient">Our Vision</h3>
                             </div>
-                        </Card>
-                    </motion.div>
+                            <p className="text-gray-300 leading-relaxed">
+                                To be a leading force in MEP engineering and education, recognized for our
+                                commitment to sustainability, innovation, and reliability. We envision a
+                                future where engineering excellence and quality education work hand-in-hand
+                                to create lasting value for our clients, students, and communities.
+                            </p>
+                        </div>
+                    </Card>
 
-                    <motion.div
-                        variants={childFade}
-                        whileHover={{ scale: 1.05 }}
-                        transition={{
-                            duration: 0.55,
-                            ease: cinematicEase,
-                            scale: { duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] },
-                        }}
-                    >
-                        <Card>
-                            <div className="p-8 bg-secondary-900">
-                                <div className="flex items-center gap-4 mb-6">
-                                    <div className="w-12 h-12 md:w-16 md:h-16 bg-primary-100 rounded-full flex items-center justify-center shrink-0">
-                                        <Rocket className="w-6 h-6 md:w-8 md:h-8 text-primary-600" />
-                                    </div>
-                                    <h3 className="text-2xl font-bold text-gold-gradient">Our Mission</h3>
+                    <Card hover className="bg-secondary-900 border border-gold-800/10">
+                        <div className="p-8">
+                            <div className="flex items-center gap-4 mb-6">
+                                <div className="w-12 h-12 md:w-16 md:h-16 bg-primary-100 rounded-full flex items-center justify-center shrink-0">
+                                    <Rocket className="w-6 h-6 md:w-8 md:h-8 text-primary-600" />
                                 </div>
-                                <p className="text-gray-300 leading-relaxed">
-                                    To integrate expertise, practical exposure, and cutting-edge technology in
-                                    both design and training. We are committed to delivering sustainable,
-                                    code-compliant engineering solutions while empowering the next generation
-                                    of MEP professionals through comprehensive, industry-aligned education.
-                                </p>
+                                <h3 className="text-2xl font-bold text-gold-gradient">Our Mission</h3>
                             </div>
-                        </Card>
-                    </motion.div>
+                            <p className="text-gray-300 leading-relaxed">
+                                To integrate expertise, practical exposure, and cutting-edge technology in
+                                both design and training. We are committed to delivering sustainable,
+                                code-compliant engineering solutions while empowering the next generation
+                                of MEP professionals through comprehensive, industry-aligned education.
+                            </p>
+                        </div>
+                    </Card>
                 </motion.div>
             </Section>
 
@@ -275,90 +258,80 @@ export default function AboutPage() {
                         </h2>
                     </motion.div>
 
-                    <motion.div
-                        variants={childFade}
-                        whileHover={{ scale: 1.03 }}
-                        transition={{
-                            duration: 0.55,
-                            ease: cinematicEase,
-                            scale: { duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] },
-                        }}
-                    >
-                        <Card>
-                            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-black/90 via-secondary-900 to-black/95 border border-gold-800/40">
-                                {/* outer glow frame */}
-                                <div className="pointer-events-none absolute -inset-px rounded-3xl bg-gradient-to-br from-gold-400/25 via-transparent to-gold-700/25 opacity-70" />
+                    <Card hover className="bg-transparent border-0 shadow-none">
+                        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-black/90 via-secondary-900 to-black/95 border border-gold-800/40">
+                            {/* outer glow frame */}
+                            <div className="pointer-events-none absolute -inset-px rounded-3xl bg-gradient-to-br from-gold-400/25 via-transparent to-gold-700/25 opacity-70" />
 
-                                <div className="relative z-10 grid md:grid-cols-[auto,minmax(0,1fr)] gap-8 md:gap-10 p-8 md:p-12">
-                                    {/* Director avatar / monogram */}
-                                    <div className="flex flex-col items-center md:items-start gap-4">
-                                        <div className="relative">
-                                            <div className="absolute -inset-1 rounded-full bg-gold-500/40 blur-xl opacity-70" />
-                                            <div className="relative w-28 h-28 md:w-32 md:h-32 rounded-full bg-gradient-to-br from-primary-700 to-primary-500 border border-gold-400 flex items-center justify-center text-white text-3xl md:text-4xl font-bold tracking-widest">
-                                                SAAR
-                                            </div>
-                                        </div>
-                                        <div className="text-center md:text-left">
-                                            <p className="text-sm font-semibold text-gold-200 tracking-wide">
-                                                Director, SAAR Group
-                                            </p>
-                                            <p className="text-xs text-gray-400">
-                                                SAAR Engineering Consultancy & SAAR MEP Academy
-                                            </p>
+                            <div className="relative z-10 grid md:grid-cols-[auto,minmax(0,1fr)] gap-8 md:gap-10 p-8 md:p-12">
+                                {/* Director avatar / monogram */}
+                                <div className="flex flex-col items-center md:items-center gap-4">
+                                    <div className="relative">
+                                        <div className="absolute -inset-1 rounded-full bg-gold-500/40 blur-xl opacity-70" />
+                                        <div className="relative w-28 h-28 md:w-32 md:h-32 rounded-full bg-gradient-to-br from-primary-700 to-primary-500 border border-gold-400 flex items-center justify-center text-white text-3xl md:text-4xl font-bold tracking-widest">
+                                            SAAR
                                         </div>
                                     </div>
+                                    <div className="text-center md:text-center">
+                                        <p className="text-sm font-semibold text-gold-200 tracking-wide">
+                                            Director, SAAR Group
+                                        </p>
+                                        <p className="text-xs text-gray-400 md:text-center">
+                                            SAAR Engineering Consultancy & SAAR MEP Academy
+                                        </p>
+                                    </div>
+                                </div>
 
-                                    {/* Quote content */}
-                                    <div className="flex flex-col justify-center gap-5">
-                                        <div className="inline-flex items-center gap-3 px-4 py-1 rounded-full bg-black/40 border border-gold-800/40 self-start">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-gold-400" />
-                                            <span className="text-xs md:text-sm font-semibold uppercase tracking-[0.22em] text-gold-gradient">
-                                                Director’s Perspective
+                                {/* Quote content */}
+                                <div className="flex flex-col justify-center gap-5">
+                                    <div className="inline-flex items-center gap-3 px-4 py-1 rounded-full bg-black/40 border border-gold-800/40 self-start">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-gold-400" />
+                                        <span className="text-xs md:text-sm font-semibold uppercase tracking-[0.22em] text-gold-gradient">
+                                            Director’s Perspective
+                                        </span>
+                                    </div>
+
+                                    <div className="flex gap-4">
+                                        <div className="mt-1 hidden md:block">
+                                            <svg className="w-10 h-10 text-gold-300/80" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M10.5 4C7.47 4 5 6.47 5 9.5 5 12 6.64 14.1 9 14.8V20h4v-9.5C13 6.47 12.03 4 10.5 4zm8 0C15.47 4 13 6.47 13 9.5c0 2.5 1.64 4.6 4 5.3V20h4v-9.5C21 6.47 20.03 4 18.5 4z" />
+                                            </svg>
+                                        </div>
+                                        <p className="text-lg md:text-xl text-gray-200 leading-relaxed">
+                                            <span className="italic">
+                                                At SAAR Group, we believe that true excellence comes from combining{' '}
                                             </span>
-                                        </div>
+                                            <span className="text-gold-gradient font-semibold">
+                                                engineering expertise
+                                            </span>
+                                            <span className="italic">
+                                                {' '}with{' '}
+                                            </span>
+                                            <span className="text-gold-gradient font-semibold">
+                                                educational empowerment
+                                            </span>
+                                            <span className="italic">
+                                                . Our dual focus on consultancy and training creates a unique value proposition
+                                                that benefits our clients, students, and the industry as a whole.
+                                            </span>
+                                        </p>
+                                    </div>
 
-                                        <div className="flex gap-4">
-                                            <div className="mt-1 hidden md:block">
-                                                <svg className="w-10 h-10 text-gold-300/80" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M10.5 4C7.47 4 5 6.47 5 9.5 5 12 6.64 14.1 9 14.8V20h4v-9.5C13 6.47 12.03 4 10.5 4zm8 0C15.47 4 13 6.47 13 9.5c0 2.5 1.64 4.6 4 5.3V20h4v-9.5C21 6.47 20.03 4 18.5 4z" />
-                                                </svg>
-                                            </div>
-                                            <p className="text-lg md:text-xl text-gray-200 leading-relaxed">
-                                                <span className="italic">
-                                                    At SAAR Group, we believe that true excellence comes from combining{' '}
-                                                </span>
-                                                <span className="text-gold-gradient font-semibold">
-                                                    engineering expertise
-                                                </span>
-                                                <span className="italic">
-                                                    {' '}with{' '}
-                                                </span>
-                                                <span className="text-gold-gradient font-semibold">
-                                                    educational empowerment
-                                                </span>
-                                                <span className="italic">
-                                                    . Our dual focus on consultancy and training creates a unique value proposition
-                                                    that benefits our clients, students, and the industry as a whole.
-                                                </span>
-                                            </p>
-                                        </div>
-
-                                        <div className="flex items-center gap-3 pt-2 border-t border-gold-900/40 mt-2">
-                                            <span className="w-8 h-px bg-gold-500/70" />
-                                            <p className="text-sm md:text-base font-semibold text-gold-gradient">
-                                                — Director, SAAR Group
-                                            </p>
-                                        </div>
+                                    <div className="flex items-center justify-end gap-3 pt-2 border-t border-gold-900/40 mt-2">
+                                        <span className="w-8 h-px bg-gold-500/70" />
+                                        <p className="text-sm md:text-right font-semibold text-gold-gradient">
+                                            — Director, SAAR Group
+                                        </p>
                                     </div>
                                 </div>
                             </div>
-                        </Card>
-                    </motion.div>
+                        </div>
+                    </Card>
                 </motion.div>
             </Section>
 
             {/* Core Values */}
-            <Section background="primary" backgroundSlot={<ParallaxStars />}>
+            <Section background="primary">
                 <motion.div
                     variants={sectionReveal}
                     initial="hidden"
@@ -366,51 +339,30 @@ export default function AboutPage() {
                     viewport={eagerViewport}
                     className="text-center mb-12"
                 >
-                    <motion.h2
-                        variants={childFade}
-                        className="text-3xl md:text-4xl font-bold text-gold-gradient mb-4"
-                    >
+                    <h2 className="text-3xl md:text-4xl font-bold text-gold-gradient mb-4">
                         Our Core Values
-                    </motion.h2>
+                    </h2>
                 </motion.div>
-                <motion.div
-                    variants={sectionReveal}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={eagerViewport}
-                    className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto "
-                >
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto ">
                     {coreValues.map((value, index) => {
                         const Icon = value.icon;
                         return (
-                            <motion.div
-                                key={value.title}
-                                variants={childFade}
-                                whileHover={{ scale: 1.07 }}
-                                transition={{
-                                    delay: index * 0.1,
-                                    duration: 0.5,
-                                    ease: cinematicEase,
-                                    scale: { duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] },
-                                }}
-                            >
-                                <Card>
-                                    <div className="p-6 text-center bg-secondary-900">
-                                        <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                            <Icon className="w-8 h-8 text-primary-600" />
-                                        </div>
-                                        <h3 className="text-xl font-bold text-gold-gradient mb-2">{value.title}</h3>
-                                        <p className="text-gray-300">{value.description}</p>
+                            <Card key={value.title} hover className="bg-secondary-900 border border-gold-800/10">
+                                <div className="p-6 text-center">
+                                    <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                        <Icon className="w-8 h-8 text-primary-600" />
                                     </div>
-                                </Card>
-                            </motion.div>
+                                    <h3 className="text-xl font-bold text-gold-gradient mb-2">{value.title}</h3>
+                                    <p className="text-gray-300">{value.description}</p>
+                                </div>
+                            </Card>
                         );
                     })}
-                </motion.div>
+                </div>
             </Section>
 
             {/* CTA */}
-            <Section backgroundSlot={<ParallaxStars />}>
+            <Section>
                 <motion.div
                     variants={sectionReveal}
                     initial="hidden"
@@ -418,30 +370,21 @@ export default function AboutPage() {
                     viewport={eagerViewport}
                     className="max-w-4xl mx-auto text-center"
                 >
-                    <motion.h2 variants={childFade} className="text-3xl md:text-4xl font-bold text-gold-gradient mb-6">
+                    <h2 className="text-3xl md:text-4xl font-bold text-gold-gradient mb-6">
                         Discover Our Divisions
-                    </motion.h2>
-                    <motion.p variants={childFade} className="text-lg text-gray-300 mb-8">
+                    </h2>
+                    <p className="text-lg text-gray-300 mb-8">
                         Learn more about how our Engineering Consultancy and MEP Academy work together
                         to deliver excellence.
-                    </motion.p>
-                    <motion.div
-                        variants={childFade}
-                        whileHover={{ scale: 1.03 }}
-                        transition={{
-                            duration: 0.45,
-                            ease: cinematicEase,
-                            scale: { duration: 0.22, ease: [0.25, 0.46, 0.45, 0.94] },
-                        }}
-                        className="inline-flex"
-                    >
+                    </p>
+                    <div className="inline-flex">
                         <Link href="/divisions">
                             <Button variant="primary" className="w-full sm:w-auto">
                                 Explore Divisions
                                 <ArrowRight className="w-5 h-5 ml-2 inline" />
                             </Button>
                         </Link>
-                    </motion.div>
+                    </div>
                 </motion.div>
             </Section>
         </>

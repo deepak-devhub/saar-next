@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, type Variants } from 'framer-motion';
 import {
     Building2, Wind, Zap, Droplets, Cpu, Shield,
@@ -32,49 +33,49 @@ const services = [
         icon: Wind,
         title: 'Mechanical (HVAC & Firefighting)',
         description: 'Complete HVAC system design and firefighting solutions',
-        image: hvacImage.src
+        image: hvacImage
     },
     {
         icon: Zap,
         title: 'Electrical System Design',
         description: 'Comprehensive electrical design and power distribution',
-        image: electricalImage.src
+        image: electricalImage
     },
     {
         icon: Droplets,
         title: 'Plumbing System Design',
         description: 'Efficient plumbing and water management systems',
-        image: plumbingImage.src
+        image: plumbingImage
     },
     {
         icon: Cpu,
         title: 'ELV System Design',
         description: 'Extra Low Voltage systems including security and communication',
-        image: elvImage.src
+        image: elvImage
     },
     {
         icon: Shield,
         title: 'FLS System Design',
         description: 'Fire Life Safety systems and emergency response',
-        image: flsImage.src
+        image: flsImage
     },
     {
         icon: Building2,
         title: 'BIM & Coordination',
         description: 'Building Information Modeling and multi-disciplinary coordination',
-        image: bimImage.src
+        image: bimImage
     },
     {
         icon: PenTool,
         title: 'Auto CAD Designing',
         description: 'Professional 2D and 3D drafting and design services using industry-standard AutoCAD software.',
-        image: autoCadImage.src
+        image: autoCadImage
     },
     {
         icon: Terminal,
         title: 'Software Training',
         description: 'Specialized technical software training for engineering professionals and students.',
-        image: softwareTrainingImage.src
+        image: softwareTrainingImage
     },
 ];
 
@@ -85,24 +86,27 @@ const highlights = [
     { icon: TrendingUp, title: 'Value Engineering', description: 'Optimized solutions that maximize value' },
 ];
 
-const projects = [
+const projectsList = [
     {
         id: 1,
         title: 'NMDC Extension Project',
         location: 'ICAD',
         description: 'Large-scale commercial extension with comprehensive MEP systems',
+        image: nmdcImage
     },
     {
         id: 2,
         title: 'Euromech Industrial Facility',
         location: 'KEZAD',
         description: 'Industrial MEP design for manufacturing facility',
+        image: industryImage
     },
     {
         id: 3,
         title: 'Foodhub Industrial Facility',
         location: 'KEZAD',
         description: 'Specialized MEP systems for food processing facility',
+        image: foodImage
     },
 ];
 
@@ -147,9 +151,12 @@ export default function ConsultancyPage() {
         <>
             {/* Hero Section */}
             <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center text-white overflow-hidden">
-                <div
-                    className="absolute inset-0 bg-cover bg-center"
-                    style={{ backgroundImage: `url(${consultancyPageImage.src})` }}
+                <Image
+                    src={consultancyPageImage}
+                    alt="Consultancy Hero"
+                    fill
+                    priority
+                    className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-br from-black/65 via-black/55 to-black/45" />
                 <div
@@ -262,7 +269,7 @@ export default function ConsultancyPage() {
             </Section>
 
             {/* Services Grid */}
-            <Section background="primary" backgroundSlot={<ParallaxStars />}>
+            <Section background="primary">
                 <motion.div
                     variants={sectionReveal}
                     initial="hidden"
@@ -277,78 +284,60 @@ export default function ConsultancyPage() {
                         Comprehensive MEP engineering solutions for all project types
                     </motion.p>
                 </motion.div>
-                <motion.div
-                    variants={sectionReveal}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={eagerViewport}
-                    className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
-                >
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
                     {services.map((service, index) => {
                         const Icon = service.icon;
                         return (
-                            <motion.div
-                                key={service.title}
-                                variants={childFade}
-                                initial="rest"
-                                whileHover="hover"
-                                animate="rest"
-                                transition={{
-                                    delay: index * 0.1,
-                                    duration: 0.5,
-                                    ease: cinematicEase,
-                                }}
-                            >
-                                <Card hover className="group h-full flex flex-col bg-secondary-900 border-gold-800/10 hover:border-gold-800/30">
-                                    <motion.div
-                                        className="aspect-video relative overflow-hidden"
+                            <Card key={service.title} hover className="group h-full flex flex-col bg-secondary-900 border-gold-800/10 hover:border-gold-800/30">
+                                <div className="aspect-video relative overflow-hidden">
+                                    <Image
+                                        src={service.image}
+                                        alt={service.title}
+                                        fill
+                                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-br from-black/30 via-black/10 to-black/35" />
+                                    <div
+                                        className="absolute inset-0 pointer-events-none"
                                         style={{
-                                            backgroundImage: `url(${service.image})`,
-                                            backgroundSize: 'cover',
-                                            backgroundPosition: 'center',
+                                            backgroundImage:
+                                                'linear-gradient(90deg, rgba(240, 229, 149, 0.55) 0%, rgba(222, 204, 128, 0.55) 50%, rgba(182, 150, 77, 0.55) 100%)',
+                                            mixBlendMode: 'soft-light',
+                                            opacity: 1.5,
                                         }}
-                                    >
-                                        <div className="absolute inset-0 bg-gradient-to-br from-black/30 via-black/10 to-black/35" />
-                                        <div
-                                            className="absolute inset-0 pointer-events-none"
-                                            style={{
-                                                backgroundImage:
-                                                    'linear-gradient(90deg, rgba(240, 229, 149, 0.55) 0%, rgba(222, 204, 128, 0.55) 50%, rgba(182, 150, 77, 0.55) 100%)',
-                                                mixBlendMode: 'soft-light',
-                                                opacity: 1.5,
-                                            }}
-                                        />
-                                        <motion.div
-                                            variants={{
-                                                rest: { opacity: 0, x: '-60%' },
-                                                hover: {
-                                                    opacity: 0.85,
-                                                    x: '120%',
-                                                    transition: { duration: 0.9, ease: [0.45, 0, 0.55, 1] },
-                                                },
-                                            }}
-                                            className="absolute inset-0 pointer-events-none"
-                                            style={{
-                                                backgroundImage:
-                                                    'linear-gradient(120deg, rgba(240, 229, 149, 0) 0%, rgba(240, 229, 149, 0.2) 20%, rgba(240, 229, 149, 0.55) 45%, rgba(222, 204, 128, 0.75) 55%, rgba(182, 150, 77, 0.4) 65%, rgba(182, 150, 77, 0) 85%)',
-                                                mixBlendMode: 'screen',
-                                                transform: 'skewX(-12deg)',
-                                                filter: 'blur(1px)',
-                                            }}
-                                        />
-                                        <div className="absolute top-4 right-4 bg-white/90 text-primary-600 p-2.5 rounded-xl shadow-lg backdrop-blur-sm group-hover:scale-110 transition-transform duration-300">
-                                            <Icon className="w-5 h-5" />
-                                        </div>
-                                    </motion.div>
-                                    <div className="p-6 flex-grow flex flex-col">
-                                        <h3 className="text-2xl font-bold text-gold-gradient mb-3">{service.title}</h3>
-                                        <p className="text-gray-300 leading-relaxed">{service.description}</p>
+                                    />
+                                    <motion.div
+                                        className="glare-effect absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                        style={{
+                                            backgroundImage:
+                                                'linear-gradient(120deg, rgba(240, 229, 149, 0) 0%, rgba(240, 229, 149, 0.2) 20%, rgba(240, 229, 149, 0.55) 45%, rgba(222, 204, 128, 0.75) 55%, rgba(182, 150, 77, 0.4) 65%, rgba(182, 150, 77, 0) 85%)',
+                                            mixBlendMode: 'screen',
+                                            transform: 'skewX(-12deg)',
+                                            filter: 'blur(1px)',
+                                        }}
+                                        animate={{
+                                            x: ['-100%', '200%'],
+                                        }}
+                                        transition={{
+                                            duration: 1.5,
+                                            repeat: Infinity,
+                                            repeatDelay: 2,
+                                            ease: "linear"
+                                        }}
+                                    />
+                                    <div className="absolute top-4 right-4 bg-white/90 text-primary-600 p-2.5 rounded-xl shadow-lg backdrop-blur-sm group-hover:scale-110 transition-transform duration-300">
+                                        <Icon className="w-5 h-5" />
                                     </div>
-                                </Card>
-                            </motion.div>
+                                </div>
+                                <div className="p-6 flex-grow flex flex-col">
+                                    <h3 className="text-2xl font-bold text-gold-gradient mb-3">{service.title}</h3>
+                                    <p className="text-gray-300 leading-relaxed">{service.description}</p>
+                                </div>
+                            </Card>
                         );
                     })}
-                </motion.div>
+                </div>
             </Section>
 
             {/* Why Choose SAAR */}
@@ -398,7 +387,7 @@ export default function ConsultancyPage() {
             </Section>
 
             {/* Featured Projects */}
-            <Section background="primary" backgroundSlot={<ParallaxStars />}>
+            <Section background="primary">
                 <motion.div
                     variants={sectionReveal}
                     initial="hidden"
@@ -414,102 +403,39 @@ export default function ConsultancyPage() {
                     </motion.p>
                 </motion.div>
                 <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    {projects.map((project, index) => (
-                        <motion.div
-                            key={project.id}
-                            initial="rest"
-                            animate="rest"
-                            whileHover="hover"
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: '-100px' }}
-                            variants={{
-                                rest: { opacity: 0, y: 20, scale: 1 },
-                                hover: { opacity: 1, y: 0, scale: 1.05 },
-                            }}
-                            transition={{
-                                delay: index * 0.1,
-                                duration: 0.5,
-                                ease: cinematicEase,
-                                scale: { duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }
-                            }}
-                        >
-                            <Card hover className="group h-full flex flex-col bg-secondary-900">
-                                <motion.div
-                                    className={`aspect-video relative overflow-hidden ${project.id === 1 || project.id === 2 || project.id === 3
-                                        ? ''
-                                        : 'bg-gradient-to-br from-primary-400 to-primary-600'
-                                        }`}
-                                    style={
-                                        project.id === 1
-                                            ? {
-                                                backgroundImage: `url(${nmdcImage.src})`,
-                                                backgroundSize: 'cover',
-                                                backgroundPosition: 'center',
-                                            }
-                                            : project.id === 2
-                                                ? {
-                                                    backgroundImage: `url(${industryImage.src})`,
-                                                    backgroundSize: 'cover',
-                                                    backgroundPosition: 'center',
-                                                }
-                                                : project.id === 3
-                                                    ? {
-                                                        backgroundImage: `url(${foodImage.src})`,
-                                                        backgroundSize: 'cover',
-                                                        backgroundPosition: 'center',
-                                                    }
-                                                    : undefined
-                                    }
-                                >
-                                    {(project.id === 1 || project.id === 2 || project.id === 3) && (
-                                        <div className="absolute inset-0 bg-gradient-to-br from-black/30 via-black/10 to-black/35" />
-                                    )}
-                                    {/* Brand gold soft-light overlay to keep text legible on lighter images */}
-                                    <div
-                                        className="absolute inset-0 pointer-events-none"
-                                        style={{
-                                            backgroundImage:
-                                                'linear-gradient(90deg, rgba(240, 229, 149, 0.55) 0%, rgba(222, 204, 128, 0.55) 50%, rgba(182, 150, 77, 0.55) 100%)',
-                                            mixBlendMode: 'soft-light',
-                                            opacity: 1.5,
-                                        }}
-                                    />
-                                    {/* Animated gold glare sweep on hover */}
-                                    <motion.div
-                                        variants={{
-                                            rest: { opacity: 0, x: '-60%' },
-                                            hover: {
-                                                opacity: 0.85,
-                                                x: '120%',
-                                                transition: { duration: 0.9, ease: [0.45, 0, 0.55, 1] },
-                                            },
-                                        }}
-                                        className="absolute inset-0 pointer-events-none"
-                                        style={{
-                                            backgroundImage:
-                                                'linear-gradient(120deg, rgba(240, 229, 149, 0) 0%, rgba(240, 229, 149, 0.2) 20%, rgba(240, 229, 149, 0.55) 45%, rgba(222, 204, 128, 0.75) 55%, rgba(182, 150, 77, 0.4) 65%, rgba(182, 150, 77, 0) 85%)',
-                                            mixBlendMode: 'screen',
-                                            transform: 'skewX(-12deg)',
-                                            filter: 'blur(1px)',
-                                        }}
-                                    />
-                                    <div className="absolute inset-0 flex items-center justify-center text-white">
-                                        {/* <Building2 className="w-16 h-16 opacity-80" /> */}
-                                    </div>
-                                </motion.div>
-                                <div className="p-6 flex-grow flex flex-col">
-                                    <h3 className="text-xl font-bold text-gold-gradient mb-2">{project.title}</h3>
-                                    <p className="text-sm text-gold-gradient mb-2">{project.location}</p>
-                                    <p className="text-gray-300 flex-grow">{project.description}</p>
-                                </div>
-                            </Card>
-                        </motion.div>
+                    {projectsList.map((project, index) => (
+                        <Card key={project.id} hover className="group h-full flex flex-col bg-secondary-900 border border-gold-800/10">
+                            <div className="aspect-video relative overflow-hidden">
+                                <Image
+                                    src={project.image}
+                                    alt={project.title}
+                                    fill
+                                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-br from-black/30 via-black/10 to-black/35" />
+                                <div
+                                    className="absolute inset-0 pointer-events-none"
+                                    style={{
+                                        backgroundImage:
+                                            'linear-gradient(90deg, rgba(240, 229, 149, 0.55) 0%, rgba(222, 204, 128, 0.55) 50%, rgba(182, 150, 77, 0.55) 100%)',
+                                        mixBlendMode: 'soft-light',
+                                        opacity: 1.5,
+                                    }}
+                                />
+                            </div>
+                            <div className="p-6 flex-grow flex flex-col">
+                                <h3 className="text-xl font-bold text-gold-gradient mb-2">{project.title}</h3>
+                                <p className="text-sm text-gold-gradient mb-2">{project.location}</p>
+                                <p className="text-gray-300 flex-grow">{project.description}</p>
+                            </div>
+                        </Card>
                     ))}
                 </div>
             </Section>
 
             {/* CTAs */}
-            <Section backgroundSlot={<ParallaxStars />}>
+            <Section>
                 <motion.div
                     variants={sectionReveal}
                     initial="hidden"

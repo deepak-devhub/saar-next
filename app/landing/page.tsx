@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import logo from '@/assets/images/logo.png';
 
 export default function LandingPage() {
@@ -118,7 +119,14 @@ export default function LandingPage() {
                                 }
                             }}
                         >
-                            <img src={logo.src} alt="SAAR logo" className="w-full h-auto object-contain" />
+                            <Image
+                                src={logo}
+                                alt="SAAR logo"
+                                width={256}
+                                height={256}
+                                className="w-full h-auto object-contain"
+                                priority
+                            />
                         </motion.div>
                         {showText && (
                             <motion.div

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 interface Client {
     name: string;
@@ -108,13 +109,17 @@ export default function ClientCarousel({ clients }: ClientCarouselProps) {
                                 width: `calc(${100 / itemsToShow}% - ${(itemsToShow - 1) * gap / itemsToShow}rem)`,
                             }}
                         >
-                            <img
-                                src={client.logo}
-                                alt={client.name}
-                                className={`max-w-full max-h-full object-contain transition-all duration-500 group-hover:scale-110 ${client.isDarkLogo ? 'brightness-200 invert' : ''
-                                    } ${client.name === 'KEZAD' ? 'brightness-125 saturate-200 contrast-110' : ''
-                                    } ${['ARCA Technologies', 'Art Central', 'Euro Mechanical', 'China Harbour'].includes(client.name) ? 'brightness-125 contrast-110' : ''}`}
-                            />
+                            <div className="relative w-full h-full">
+                                <Image
+                                    src={client.logo}
+                                    alt={client.name}
+                                    fill
+                                    className={`object-contain transition-all duration-500 group-hover:scale-110 ${client.isDarkLogo ? 'brightness-200 invert' : ''
+                                        } ${client.name === 'KEZAD' ? 'brightness-125 saturate-200 contrast-110' : ''
+                                        } ${['ARCA Technologies', 'Art Central', 'Euro Mechanical', 'China Harbour'].includes(client.name) ? 'brightness-125 contrast-110' : ''}`}
+                                    sizes="(max-width: 640px) 50vw, 20vw"
+                                />
+                            </div>
                         </div>
                     ))}
                 </motion.div>

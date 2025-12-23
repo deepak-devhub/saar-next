@@ -23,13 +23,14 @@ export default function ParallaxStars({ className = '' }: ParallaxStarsProps) {
   }, []);
 
   const starShadows = useMemo(() => {
-    if (!mounted) return { small: '', medium: '', large: '' };
     return {
-      small: createStarShadow(400),
-      medium: createStarShadow(100),
-      large: createStarShadow(50),
+      small: createStarShadow(150),
+      medium: createStarShadow(40),
+      large: createStarShadow(15),
     };
-  }, [mounted]);
+  }, []); // Remove mounted dependency to avoid double render on mount if possible, or keep it if we need hydration safety.
+  // Actually, keeping it empty [] means it's stable.
+
 
   if (!mounted) return <div className={`absolute inset-0 pointer-events-none ${className}`} aria-hidden="true" />;
 

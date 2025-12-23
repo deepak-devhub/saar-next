@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -373,10 +374,14 @@ export default function HomePage() {
                         <div data-card className="h-full">
                             <Link href="/consultancy">
                                 <Card hover className="h-full group">
-                                    <div
-                                        className="aspect-video relative overflow-hidden bg-cover bg-center"
-                                        style={{ backgroundImage: `url(${consultancyImage.src})` }}
-                                    >
+                                    <div className="aspect-video relative overflow-hidden">
+                                        <Image
+                                            src={consultancyImage}
+                                            alt="Consultancy Division"
+                                            fill
+                                            className="object-cover group-hover:scale-110 transition-transform duration-500"
+                                            sizes="(max-width: 768px) 100vw, 50vw"
+                                        />
                                         <div className="absolute inset-0 bg-black/50"></div>
                                         <div
                                             className="absolute inset-0 pointer-events-none"
@@ -392,11 +397,15 @@ export default function HomePage() {
                                                     <Building2 className="w-16 h-16 mx-auto" />
                                                 </div>
                                                 <div className="flex items-center gap-4">
-                                                    <img
-                                                        src={logo.src}
-                                                        alt="SAAR logo"
-                                                        className="w-16 h-16 rounded-full bg-white/10 p-1 transition-transform duration-500 group-hover:rotate-[360deg]"
-                                                    />
+                                                    <div className="relative w-16 h-16 rounded-full bg-white/10 p-1 flex items-center justify-center transition-transform duration-500 group-hover:rotate-[360deg]">
+                                                        <Image
+                                                            src={logo}
+                                                            alt="SAAR logo"
+                                                            width={64}
+                                                            height={64}
+                                                            className="rounded-full"
+                                                        />
+                                                    </div>
                                                     <div className="text-left">
                                                         <h3 className="text-2xl font-bold mb-2 text-gold-gradient">
                                                             SAAR Engineering Consultancy
@@ -426,10 +435,14 @@ export default function HomePage() {
                         <div data-card className="h-full">
                             <Link href="/academy">
                                 <Card hover className="h-full bg-secondary-900 group">
-                                    <div
-                                        className="aspect-video relative overflow-hidden bg-cover bg-center"
-                                        style={{ backgroundImage: `url(${academyImage.src})` }}
-                                    >
+                                    <div className="aspect-video relative overflow-hidden">
+                                        <Image
+                                            src={academyImage}
+                                            alt="Academy Division"
+                                            fill
+                                            className="object-cover group-hover:scale-110 transition-transform duration-500"
+                                            sizes="(max-width: 768px) 100vw, 50vw"
+                                        />
                                         <div className="absolute inset-0 bg-black/50"></div>
                                         <div
                                             className="absolute inset-0 pointer-events-none"
@@ -445,11 +458,15 @@ export default function HomePage() {
                                                     <GraduationCap className="w-16 h-16 mx-auto" />
                                                 </div>
                                                 <div className="flex items-center gap-4">
-                                                    <img
-                                                        src={logo.src}
-                                                        alt="SAAR logo"
-                                                        className="w-16 h-16 rounded-full bg-white/10 p-1 transition-transform duration-500 group-hover:rotate-[360deg]"
-                                                    />
+                                                    <div className="relative w-16 h-16 rounded-full bg-white/10 p-1 flex items-center justify-center transition-transform duration-500 group-hover:rotate-[360deg]">
+                                                        <Image
+                                                            src={logo}
+                                                            alt="SAAR logo"
+                                                            width={64}
+                                                            height={64}
+                                                            className="rounded-full"
+                                                        />
+                                                    </div>
                                                     <div className="text-left">
                                                         <h3 className="text-2xl font-bold mb-2 text-gold-gradient">
                                                             SAAR MEP Academy
@@ -480,7 +497,7 @@ export default function HomePage() {
             </Section>
 
             {/* About Section */}
-            <Section backgroundSlot={<ParallaxStars />}>
+            <Section>
                 <div ref={aboutRef} className="max-w-4xl mx-auto text-center">
                     <h2 className="text-3xl md:text-4xl font-bold text-gold-gradient mb-6">
                         About SAAR Group
@@ -531,8 +548,14 @@ export default function HomePage() {
                         ].map((project) => (
                             <Link key={project.id} href="/projects" data-project-card>
                                 <Card hover className="h-full group bg-secondary-900 border-gold-800/10">
-                                    <div className="aspect-video relative overflow-hidden bg-gold-900/20 flex items-center justify-center">
-                                        <img src={project.image.src} alt={project.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                                    <div className="aspect-video relative overflow-hidden bg-gold-900/20">
+                                        <Image
+                                            src={project.image}
+                                            alt={project.title}
+                                            fill
+                                            className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                            sizes="(max-width: 768px) 100vw, 33vw"
+                                        />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
                                         <div className="absolute bottom-4 left-4 right-4">
                                             <p className="text-xs font-bold text-gold-500 uppercase tracking-widest mb-1">{project.location}</p>
@@ -562,7 +585,7 @@ export default function HomePage() {
             </Section>
 
             {/* Core Strengths */}
-            <Section backgroundSlot={<ParallaxStars />}>
+            <Section>
                 <div ref={strengthsRef} className="w-full">
                     <div className="text-center mb-12">
                         <h2 className="text-3xl md:text-4xl font-bold text-gold-gradient mb-4">
@@ -624,7 +647,7 @@ export default function HomePage() {
             </Section>
 
             {/* Client & Partner Logos */}
-            <Section backgroundSlot={<ParallaxStars />}>
+            <Section>
                 <div ref={clientsRef} className="w-full">
                     <div className="text-center mb-12">
                         <h2 className="text-3xl md:text-4xl font-bold text-gold-gradient mb-4">
