@@ -1,26 +1,206 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-sans: 'Inter', 'system-ui', 'sans-serif';
+
+  --color-primary-50: #fffdf5;
+  --color-primary-100: #fffceb;
+  --color-primary-200: #fff7cc;
+  --color-primary-300: #ffefa8;
+  --color-primary-400: #ffd966;
+  --color-primary-500: #f4c430;
+  --color-primary-600: #d4af37;
+  --color-primary-700: #b8860b;
+  --color-primary-800: #9a7209;
+  --color-primary-900: #7d5e07;
+
+  --color-gold-50: #fffdf5;
+  --color-gold-100: #fffceb;
+  --color-gold-200: #fff7cc;
+  --color-gold-300: #ffefa8;
+  --color-gold-400: #ffd966;
+  --color-gold-500: #f4c430;
+  --color-gold-600: #d4af37;
+  --color-gold-700: #b8860b;
+  --color-gold-800: #9a7209;
+  --color-gold-900: #7d5e07;
+
+  --color-secondary-50: #fafafa;
+  --color-secondary-100: #f5f5f5;
+  --color-secondary-200: #e5e5e5;
+  --color-secondary-300: #d4d4d4;
+  --color-secondary-400: #a3a3a3;
+  --color-secondary-500: #737373;
+  --color-secondary-600: #525252;
+  --color-secondary-700: #404040;
+  --color-secondary-800: #262626;
+  --color-secondary-900: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: black;
+    color: white;
+  }
+
+  /* Custom scrollbar styling - matches gold/black theme */
+  html {
+    overflow-y: overlay;
+    /* Overlay scrollbar - doesn't take width */
+    scrollbar-width: thin;
+    /* Firefox: Show thin scrollbar by default */
+    scrollbar-color: rgba(244, 196, 48, 0.5) transparent;
+    /* Firefox: Gold thumb, transparent track */
+  }
+
+  /* Chrome, Safari, Opera - Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    /* Visible by default */
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+    /* Transparent track - overlays content */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(244, 196, 48, 0.5);
+    /* Gold color matching theme */
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    /* Subtle border for definition */
+    transition: background 0.2s ease;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(244, 196, 48, 0.8);
+    /* Brighter gold on hover */
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .bg-gradient-radial {
+    background: radial-gradient(circle, var(--tw-gradient-stops));
+  }
+
+  .text-gold-gradient {
+    background-image: linear-gradient(90deg, rgba(240, 229, 149, 1) 0%, rgba(222, 204, 128, 1) 50%, rgba(182, 150, 77, 1) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hover\:text-gold-gradient:hover {
+    background-image: linear-gradient(90deg, rgba(240, 229, 149, 1) 0%, rgba(222, 204, 128, 1) 50%, rgba(182, 150, 77, 1) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Gradient utilities for SVG icons (stroke/fill) */
+  .icon-stroke-gold-gradient {
+    stroke: url(#goldGradient);
+  }
+
+  .icon-fill-gold-gradient {
+    fill: url(#goldGradient);
+  }
+}
+
+/* Hero-only parallax star field */
+.star-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  box-shadow: var(--star-box-shadow);
+  animation: starFloat 50s linear infinite;
+  will-change: transform;
+}
+
+.star-layer::after {
+  content: '';
+  position: absolute;
+  top: 2000px;
+  width: inherit;
+  height: inherit;
+  background: transparent;
+  box-shadow: var(--star-box-shadow);
+}
+
+.star-layer-sm {
+  width: 1px;
+  height: 1px;
+  animation-duration: 50s;
+}
+
+.star-layer-md {
+  width: 2px;
+  height: 2px;
+  animation-duration: 100s;
+}
+
+.star-layer-lg {
+  width: 3px;
+  height: 3px;
+  animation-duration: 150s;
+}
+
+@keyframes starFloat {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-2000px);
+  }
+}
+
+/* Custom Autofill Styles to match dark theme */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+  -webkit-text-fill-color: white !important;
+  -webkit-box-shadow: 0 0 0px 1000px #171717 inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Custom selection colors */
+::selection {
+  background: #f4c430 !important;
+  color: #000 !important;
+}
+
+/* Custom focus ring with gradient border */
+.focus-gold-gradient {
+  transition: all 0.3s ease;
+}
+
+.focus-gold-gradient:focus {
+  outline: none !important;
+  border-color: transparent !important;
+  background-image:
+    linear-gradient(#171717, #171717),
+    linear-gradient(90deg, #f0e595 0%, #decc80 50%, #b6964d 100%) !important;
+  background-origin: border-box !important;
+  background-clip: padding-box, border-box !important;
+  border: 1.5px solid transparent !important;
+  box-shadow: 0 0 15px rgba(244, 196, 48, 0.2) !important;
 }
