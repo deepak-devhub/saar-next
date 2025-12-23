@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+
 import Image, {StaticImageData} from 'next/image';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { X, Maximize2 } from 'lucide-react';
@@ -75,10 +77,17 @@ export default function GalleryPage() {
     useScrollAnimations();
     const [selectedImage, setSelectedImage] =
     useState<(typeof galleryItems)[number] | null>(null);
+const pathname = usePathname();
 
 
     return (
-        <div className="min-h-screen bg-black">
+        <motion.div
+  key={pathname}
+  className="min-h-screen bg-black"
+  initial="hidden"
+  animate="visible"
+>
+
             {/* Hero Section */}
             <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center text-white overflow-hidden">
                 <Image
@@ -327,6 +336,6 @@ export default function GalleryPage() {
                     </motion.div>
                 )}
             </AnimatePresence>
-        </div>
+        </motion.div>
     );
 }
