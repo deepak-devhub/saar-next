@@ -13,13 +13,13 @@ const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
 
 // Import images from public/services
 import hvacImage from '@/public/services/hvac.png';
-import electricalImage from '@/public/services/electrical-system-design.png';
-import plumbingImage from '@/public/services/plumbing-system-design.png';
-import elvImage from '@/public/services/elv-system-design.png';
-import flsImage from '@/public/services/fls-system-design.png';
-import bimImage from '@/public/services/bim-coordination.png';
-import autoCadImage from '@/public/services/autocad-designing.png';
-import softwareTrainingImage from '@/public/services/software-training.png';
+import electricalImage from '@/public/services/electrical.png';
+import plumbingImage from '@/public/services/plumbing.png';
+import elvImage from '@/public/services/elv.png';
+import flsImage from '@/public/services/fls.png';
+import bimImage from '@/public/services/bim.png';
+import autoCadImage from '@/public/services/autocad.png';
+import softwareTrainingImage from '@/public/services/software.png';
 
 
 import galleryPageImage from '@/assets/images/gallery.jpg';
