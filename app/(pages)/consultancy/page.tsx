@@ -16,16 +16,16 @@ import consultancyPageImage from '@/assets/images/consultancy_page.webp';
 import nmdcImage from '@/assets/images/nmdc.webp';
 import industryImage from '@/assets/images/industry.webp';
 import foodImage from '@/assets/images/food.webp';
-import hvacImage from '@/assets/services/HVAC.png';
-import electricalImage from '@/assets/services/electrical system design.png';
-import plumbingImage from '@/assets/services/Plumbing System Design.png';
-import elvImage from '@/assets/services/ELV System design.png';
-import flsImage from '@/assets/services/FLS System Design.png';
-import bimImage from '@/assets/services/BIM & Coordination.png';
-import autoCadImage from '@/assets/services/Auto CAD Designing.png';
-import softwareTrainingImage from '@/assets/services/Software Training.png';
+import hvacImage from '@/assets/services/hvac.png';
+import electricalImage from '@/assets/services/electrical-system-design.png';
+import plumbingImage from '@/assets/services/plumbing-system-design.png';
+import elvImage from '@/assets/services/elv-system-design.png';
+import flsImage from '@/assets/services/fls-system-design.png';
+import bimImage from '@/assets/services/bim-coordination.png';
+import autoCadImage from '@/assets/services/autocad-designing.png';
+import softwareTrainingImage from '@/assets/services/software-training.png';
 import ParallaxStars from '@/components/ui/ParallaxStars';
-import engineerLottie from '@/assets/lootie/consultancy/Engineer Gears.json';
+import engineerLottie from '@/assets/lootie/consultancy/engineer-gears.json';
 import { useScrollAnimations } from '@/hooks/useScrollAnimations';
 
 const services = [
