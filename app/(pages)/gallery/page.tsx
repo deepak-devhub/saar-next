@@ -1,9 +1,8 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { usePathname } from 'next/navigation';
 
-import Image, {StaticImageData} from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { X, Maximize2 } from 'lucide-react';
 import Section from '@/components/ui/Section';
@@ -14,7 +13,6 @@ import dynamic from 'next/dynamic';
 const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
 
 
-// Import images from public/services
 import hvacImage from '@/public/services/hvac.png';
 import electricalImage from '@/public/services/electrical.png';
 import plumbingImage from '@/public/services/plumbing.png';
@@ -28,7 +26,7 @@ import softwareTrainingImage from '@/public/services/software.png';
 import galleryPageImage from '@/assets/images/gallery.jpg';
 import galleryLottie from '@/assets/lootie/gallery/gallery.json';
 
-const galleryItems: { id: number; src: StaticImageData,  title: string; category: string }[] = [
+const galleryItems: { id: number; src: StaticImageData, title: string; category: string }[] = [
     { id: 1, src: hvacImage, title: 'HVAC System Design', category: 'Mechanical' },
     { id: 2, src: electricalImage, title: 'Electrical System Design', category: 'Electrical' },
     { id: 3, src: plumbingImage, title: 'Plumbing System Design', category: 'Plumbing' },
@@ -76,18 +74,11 @@ const eagerViewport = {
 export default function GalleryPage() {
     useScrollAnimations();
     const [selectedImage, setSelectedImage] =
-    useState<(typeof galleryItems)[number] | null>(null);
-const pathname = usePathname();
+        useState<(typeof galleryItems)[number] | null>(null);
 
 
     return (
-        <motion.div
-  key={pathname}
-  className="min-h-screen bg-black"
-  initial="hidden"
-  animate="visible"
->
-
+        <div className="min-h-screen bg-black overflow-x-hidden">
             {/* Hero Section */}
             <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center text-white overflow-hidden">
                 <Image
@@ -336,6 +327,7 @@ const pathname = usePathname();
                     </motion.div>
                 )}
             </AnimatePresence>
-        </motion.div>
+        </div>
     );
+
 }
