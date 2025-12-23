@@ -1,12 +1,15 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image, { StaticImageData } from 'next/image';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { X, Maximize2 } from 'lucide-react';
 import Section from '@/components/ui/Section';
 import ParallaxStars from '@/components/ui/ParallaxStars';
 import { useScrollAnimations } from '@/hooks/useScrollAnimations';
+import dynamic from 'next/dynamic';
+
+const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
 
 // Import images from assets/services
 import hvacImage from '@/assets/services/hvac.png';
@@ -18,7 +21,7 @@ import bimImage from '@/assets/services/bim-coordination.png';
 import autoCadImage from '@/assets/services/autocad-designing.png';
 import softwareTrainingImage from '@/assets/services/software-training.png';
 
-import Lottie from 'lottie-react';
+
 import galleryPageImage from '@/assets/images/gallery.jpg';
 import galleryLottie from '@/assets/lootie/gallery/gallery.json';
 
@@ -68,10 +71,19 @@ const eagerViewport = {
 } as const;
 
 export default function GalleryPage() {
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
     useScrollAnimations();
     const [selectedImage, setSelectedImage] = useState<typeof galleryItems[0] | null>(null);
 
     // GSAP Scroll Animations hook handled at top of component
+
+    if (!mounted) {
+        return <div className="min-h-screen bg-black" />;
+    }
 
     return (
         <div className="min-h-screen bg-black">
@@ -177,7 +189,7 @@ export default function GalleryPage() {
                     <motion.div
                         variants={sectionReveal}
                         initial="hidden"
-                        whileInView="visible"
+                        animate="visible"
                         viewport={eagerViewport}
                         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
                     >
