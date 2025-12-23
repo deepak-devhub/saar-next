@@ -23,93 +23,83 @@ export default function ContactPage() {
 
     return (
         <>
-            {/* Hero Section */}
-            <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center text-white overflow-hidden">
-                <div
-                    className="absolute inset-0 bg-cover bg-center"
-                    style={{ backgroundImage: `url(${contactImage.src})` }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-br from-black/65 via-black/55 to-black/45" />
-                <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                        backgroundImage:
-                            'linear-gradient(90deg, rgba(240, 229, 149, 0) 0%, rgba(240, 229, 149, 0.18) 25%, rgba(222, 204, 128, 0.28) 50%, rgba(182, 150, 77, 0.22) 75%, rgba(182, 150, 77, 0) 100%)',
-                        mixBlendMode: 'soft-light',
-                        filter: 'blur(0.5px)',
-                    }}
-                />
-                <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{
-                            duration: 0.5,
-                            delay: 0.2,
-                            ease: cinematicEase,
-                        }}
-                        className="relative inline-block text-center"
-                    >
-                        {/* TEXT BLOCK */}
-                        <div>
-                            <h1
-                                className="text-4xl md:text-5xl lg:text-6xl font-bold text-transparent bg-clip-text"
-                                style={{
-                                    backgroundImage:
-                                        'linear-gradient(90deg, rgba(240, 229, 149, 1) 0%, rgba(222, 204, 128, 1) 50%, rgba(182, 150, 77, 1) 100%)',
-                                }}
-                            >
-                                Contact Us
-                            </h1>
+      {/* Hero Section */}
+      <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center text-white overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${contactImage.src})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-black/65 via-black/55 to-black/45" />
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage:
+              'linear-gradient(90deg, rgba(240, 229, 149, 0) 0%, rgba(240, 229, 149, 0.18) 25%, rgba(222, 204, 128, 0.28) 50%, rgba(182, 150, 77, 0.22) 75%, rgba(182, 150, 77, 0) 100%)',
+            mixBlendMode: 'soft-light',
+            filter: 'blur(0.5px)',
+          }}
+        />
+        <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative flex flex-col md:flex-row items-center justify-center">
+            <div className="text-center z-10">
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.2,
+                  ease: [0.25, 0.1, 0.25, 1]
+                }}
+                className="text-4xl md:text-5xl lg:text-6xl font-bold text-transparent bg-clip-text mb-4"
+                style={{
+                  backgroundImage:
+                    'linear-gradient(90deg, rgba(240, 229, 149, 1) 0%, rgba(222, 204, 128, 1) 50%, rgba(182, 150, 77, 1) 100%)',
+                }}
+              >
+                Contact Us
+              </motion.h1>
 
-                            {/* ICON – MIDDLE (Mobile only) */}
-                            <div
-                                className="md:hidden flex justify-center my-4"
-                                style={{
-                                    filter:
-                                        'brightness(0) saturate(100%) invert(85%) sepia(28%) saturate(655%) hue-rotate(359deg) brightness(98%) contrast(92%)',
-                                }}
-                            >
-                                <div className="w-24 h-24">
-                                    <Lottie
-                                        animationData={contactLottie}
-                                        loop
-                                        autoplay
-                                        style={{ width: '100%', height: '100%' }}
-                                    />
-                                </div>
-                            </div>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.4,
+                  ease: [0.25, 0.1, 0.25, 1]
+                }}
+                className="text-xl md:text-2xl text-transparent bg-clip-text"
+                style={{
+                  backgroundImage:
+                    'linear-gradient(90deg, rgba(240, 229, 149, 1) 0%, rgba(222, 204, 128, 1) 50%, rgba(182, 150, 77, 1) 100%)',
+                }}
+              >
+                Get in Touch with SAAR Group
+              </motion.p>
+            </div>
 
-                            <p
-                                className="mt-3 text-xl md:text-2xl text-transparent bg-clip-text"
-                                style={{
-                                    backgroundImage:
-                                        'linear-gradient(90deg, rgba(240, 229, 149, 1) 0%, rgba(222, 204, 128, 1) 50%, rgba(182, 150, 77, 1) 100%)',
-                                }}
-                            >
-                                Get in Touch with SAAR Group
-                            </p>
-                        </div>
-
-                        {/* ICON – RIGHT SIDE (Desktop only) */}
-                        <div
-                            className="hidden md:block absolute top-1/2 md:-right-36 -translate-y-1/2 md:w-28 md:h-28"
-                            style={{
-                                filter:
-                                    'brightness(0) saturate(100%) invert(85%) sepia(28%) saturate(655%) hue-rotate(359deg) brightness(98%) contrast(92%)',
-                            }}
-                        >
-                            <Lottie
-                                animationData={contactLottie}
-                                loop
-                                autoplay
-                                style={{ width: '100%', height: '100%' }}
-                            />
-                        </div>
-                    </motion.div>
-
-                </div>
-            </section>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{
+                duration: 0.5,
+                delay: 0.3,
+                ease: [0.25, 0.1, 0.25, 1]
+              }}
+              className="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 flex items-center justify-center flex-shrink-0 md:absolute md:left-1/2 md:ml-[50px] lg:ml-[70px] mb-8 md:mb-8"
+              style={{
+                filter: 'brightness(0) saturate(100%) invert(85%) sepia(28%) saturate(655%) hue-rotate(359deg) brightness(98%) contrast(92%)',
+              }}
+            >
+              <Lottie
+                animationData={contactLottie}
+                loop={true}
+                autoplay={true}
+                style={{ width: '100%', height: '100%' }}
+              />
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
             {/* Contact Form - centered */}
             <Section backgroundSlot={<ParallaxStars />}>

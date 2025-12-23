@@ -209,7 +209,7 @@ export default function JobApplicationForm({ positionTitle, onSubmit, onCancel }
           ) : (
             <>
               <Send className="w-5 h-5" />
-              Submit Application
+              Submit
             </>
           )}
         </Button>
