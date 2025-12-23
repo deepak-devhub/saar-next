@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import Image, { StaticImageData } from 'next/image';
+import Image, {StaticImageData} from 'next/image';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { X, Maximize2 } from 'lucide-react';
 import Section from '@/components/ui/Section';
@@ -25,7 +25,7 @@ import softwareTrainingImage from '@/public/services/software.png';
 import galleryPageImage from '@/assets/images/gallery.jpg';
 import galleryLottie from '@/assets/lootie/gallery/gallery.json';
 
-const galleryItems: { id: number; src: StaticImageData; title: string; category: string }[] = [
+const galleryItems: { id: number; src: StaticImageData,  title: string; category: string }[] = [
     { id: 1, src: hvacImage, title: 'HVAC System Design', category: 'Mechanical' },
     { id: 2, src: electricalImage, title: 'Electrical System Design', category: 'Electrical' },
     { id: 3, src: plumbingImage, title: 'Plumbing System Design', category: 'Plumbing' },
