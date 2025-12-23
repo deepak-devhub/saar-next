@@ -7,22 +7,19 @@ import { motion, AnimatePresence, Variants } from "framer-motion";
 const pageVariants: Variants = {
     initial: {
         opacity: 0,
-        scale: 0.99,
     },
     animate: {
         opacity: 1,
-        scale: 1,
         transition: {
-            duration: 0.4,
+            duration: 0.3,
             ease: [0.25, 0.1, 0.25, 1],
         },
     },
     exit: {
         opacity: 0,
-        scale: 1.01,
         transition: {
-            duration: 0.3,
-            ease: 'easeOut' as any,
+            duration: 0.2,
+            ease: 'easeOut',
         },
     },
 };
@@ -32,7 +29,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
 
     return (
         <Layout>
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="popLayout" initial={false}>
                 <motion.div
                     key={pathname}
                     initial="initial"
