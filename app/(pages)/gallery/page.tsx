@@ -11,6 +11,7 @@ import dynamic from 'next/dynamic';
 
 const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
 
+
 // Import images from public/services
 import hvacImage from '@/public/services/hvac.png';
 import electricalImage from '@/public/services/electrical.png';
@@ -71,19 +72,9 @@ const eagerViewport = {
 } as const;
 
 export default function GalleryPage() {
-    const [mounted, setMounted] = useState(false);
-    useEffect(() => {
-        setMounted(true);
-    }, []);
+    const [selectedImage, setSelectedImage] =
+    useState<(typeof galleryItems)[number] | null>(null);
 
-    useScrollAnimations();
-    const [selectedImage, setSelectedImage] = useState<typeof galleryItems[0] | null>(null);
-
-    // GSAP Scroll Animations hook handled at top of component
-
-    if (!mounted) {
-        return <div className="min-h-screen bg-black" />;
-    }
 
     return (
         <div className="min-h-screen bg-black">
