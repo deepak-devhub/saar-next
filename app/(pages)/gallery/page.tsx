@@ -72,6 +72,7 @@ const eagerViewport = {
 } as const;
 
 export default function GalleryPage() {
+    useScrollAnimations();
     const [selectedImage, setSelectedImage] =
     useState<(typeof galleryItems)[number] | null>(null);
 
@@ -180,7 +181,7 @@ export default function GalleryPage() {
                     <motion.div
                         variants={sectionReveal}
                         initial="hidden"
-                        animate="visible"
+                        whileInView="visible"
                         viewport={eagerViewport}
                         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
                     >
@@ -188,7 +189,8 @@ export default function GalleryPage() {
                             <motion.div
                                 key={item.id}
                                 variants={childFade}
-                                layoutId={`gallery-item-container-${item.id}`}
+                                layoutId={`gallery-gallery-item-${item.id}`}
+
                                 className="group relative h-[400px] cursor-pointer"
                                 onClick={() => setSelectedImage(item)}
                             >
@@ -273,7 +275,8 @@ export default function GalleryPage() {
 
                         {/* Main Content */}
                         <motion.div
-                            layoutId={`gallery-item-container-${selectedImage.id}`}
+                            layoutId={`gallery-gallery-item-${selectedImage.id}`}
+
                             className="relative max-w-7xl w-full h-full flex flex-col md:flex-row items-center justify-center gap-8"
                             onClick={(e) => e.stopPropagation()}
                         >
