@@ -11,15 +11,15 @@ import dynamic from 'next/dynamic';
 
 const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
 
-// Import images from assets/services
-import hvacImage from '@/assets/services/hvac.png';
-import electricalImage from '@/assets/services/electrical-system-design.png';
-import plumbingImage from '@/assets/services/plumbing-system-design.png';
-import elvImage from '@/assets/services/elv-system-design.png';
-import flsImage from '@/assets/services/fls-system-design.png';
-import bimImage from '@/assets/services/bim-coordination.png';
-import autoCadImage from '@/assets/services/autocad-designing.png';
-import softwareTrainingImage from '@/assets/services/software-training.png';
+// Import images from public/services
+import hvacImage from '@/public/services/hvac.png';
+import electricalImage from '@/public/services/electrical-system-design.png';
+import plumbingImage from '@/public/services/plumbing-system-design.png';
+import elvImage from '@/public/services/elv-system-design.png';
+import flsImage from '@/public/services/fls-system-design.png';
+import bimImage from '@/public/services/bim-coordination.png';
+import autoCadImage from '@/public/services/autocad-designing.png';
+import softwareTrainingImage from '@/public/services/software-training.png';
 
 
 import galleryPageImage from '@/assets/images/gallery.jpg';
