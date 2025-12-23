@@ -40,26 +40,24 @@ const galleryItems: { id: number; src: StaticImageData, title: string; category:
 const cinematicEase = [0.25, 0.1, 0.25, 1] as const;
 
 const sectionReveal: Variants = {
-    hidden: { opacity: 0, y: 28 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
         opacity: 1,
         y: 0,
         transition: {
-            duration: 0.7,
+            duration: 0.5,
             ease: cinematicEase,
-            when: 'beforeChildren',
-            staggerChildren: 0.08,
         },
     },
 };
 
 const childFade: Variants = {
-    hidden: { opacity: 0, y: 18 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
         opacity: 1,
         y: 0,
         transition: {
-            duration: 0.55,
+            duration: 0.5,
             ease: cinematicEase,
         },
     },
@@ -104,8 +102,7 @@ export default function GalleryPage() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{
-                            duration: 0.6,
-                            delay: 0.2,
+                            duration: 0.5,
                             ease: cinematicEase,
                         }}
                         className="relative inline-block text-center"
@@ -140,13 +137,6 @@ export default function GalleryPage() {
                             </motion.div>
 
                             <motion.p
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{
-                                    duration: 0.5,
-                                    delay: 0.4,
-                                    ease: cinematicEase,
-                                }}
                                 className="text-xl md:text-2xl text-transparent bg-clip-text mt-3"
                                 style={{
                                     backgroundImage:
