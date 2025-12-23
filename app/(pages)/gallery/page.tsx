@@ -2,10 +2,11 @@
 
 import { useState } from 'react';
 import Image, { StaticImageData } from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { X, Maximize2 } from 'lucide-react';
 import Section from '@/components/ui/Section';
 import ParallaxStars from '@/components/ui/ParallaxStars';
+import { useScrollAnimations } from '@/hooks/useScrollAnimations';
 
 // Import images from assets/services
 import hvacImage from '@/assets/services/hvac.png';
@@ -34,30 +35,43 @@ const galleryItems: { id: number; src: StaticImageData; title: string; category:
 
 const cinematicEase = [0.25, 0.1, 0.25, 1] as const;
 
+const sectionReveal: Variants = {
+    hidden: { opacity: 0, y: 28 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.7,
+            ease: cinematicEase,
+            when: 'beforeChildren',
+            staggerChildren: 0.08,
+        },
+    },
+};
+
+const childFade: Variants = {
+    hidden: { opacity: 0, y: 18 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.55,
+            ease: cinematicEase,
+        },
+    },
+};
+
+const eagerViewport = {
+    once: true,
+    amount: 0.18,
+    margin: '0px 0px 20% 0px',
+} as const;
+
 export default function GalleryPage() {
+    useScrollAnimations();
     const [selectedImage, setSelectedImage] = useState<typeof galleryItems[0] | null>(null);
 
-    // Animation variants
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.05,
-                delayChildren: 0.1
-            }
-        }
-    };
-
-    const itemVariants = {
-        hidden: { opacity: 0, scale: 0.8, y: 20 },
-        visible: {
-            opacity: 1,
-            scale: 1,
-            y: 0,
-            transition: { duration: 0.6, ease: cinematicEase }
-        }
-    };
+    // GSAP Scroll Animations hook handled at top of component
 
     return (
         <div className="min-h-screen bg-black">
@@ -123,7 +137,7 @@ export default function GalleryPage() {
 
                             <motion.p
                                 initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
+                                animate={{ opacity: 1, y: 0 }}
                                 transition={{
                                     duration: 0.5,
                                     delay: 0.4,
@@ -161,15 +175,16 @@ export default function GalleryPage() {
             <Section backgroundSlot={<ParallaxStars />} className="relative z-10 !pt-24 !pb-32">
                 <div className="container mx-auto px-4">
                     <motion.div
-                        variants={containerVariants}
+                        variants={sectionReveal}
                         initial="hidden"
-                        animate="visible"
+                        whileInView="visible"
+                        viewport={eagerViewport}
                         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
                     >
                         {galleryItems.map((item) => (
                             <motion.div
                                 key={item.id}
-                                variants={itemVariants}
+                                variants={childFade}
                                 layoutId={`gallery-item-container-${item.id}`}
                                 className="group relative h-[400px] cursor-pointer"
                                 onClick={() => setSelectedImage(item)}
